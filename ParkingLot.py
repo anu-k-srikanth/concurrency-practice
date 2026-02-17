@@ -12,9 +12,9 @@ class ParkingLot:
         self._semaphore = BoundedSemaphore(capacity)
 
     def enter(self, car):
+        print(f"Car {car} attempting to enter parking lot")
+        acquired = self._semaphore.acquire(timeout=1)
         with self._lock:
-            print(f"Car {car} attempting to enter parking lot")
-            acquired = self._semaphore.acquire(timeout=1)
             if acquired:
                 self.cars.add(car)
             else: 
